@@ -30,5 +30,51 @@ public class InterSectionOfIntervalsTest {
 		Assert.assertArrayEquals(expected, result);
 		System.out.println("result +" + result);
 	}
+	
+	public int[][] insterInterval(int intervals[][] , int newInterval[][]) {
+		
+		int len = intervals.length ;
+		//edge case 1 begining 
+		
+		if(intervals[0][0]>newInterval[0][0]) {
+		      	if(intervals[0][0]<newInterval[0][1]) {
+		      		intervals[0][0]=Math.min(intervals[0][0], newInterval[0][0]);
+		      		intervals[0][1]=Math.max(intervals[0][1], newInterval[0][1]);
+		      	}else {
+		      		int temp[][] = new int[intervals.length+1][2];
+		      		temp[0]= newInterval[0];
+		      		int k=1;
+		      		for(int i=0;i<intervals.length;i++) {
+		      			temp[k++]=intervals[i];
+		      		}
+		      		intervals=temp ;
+		      		
+		      	}
+		      	return intervals ;
+			
+		}else if(intervals[len-1][1]<newInterval[0][1]) {
+			
+			 if(intervals[len-1][1]>newInterval[0][0]) {
+				 intervals[len-1][0]=Math.min(intervals[len-1][0], newInterval[0][0]);
+		      	 intervals[len-1][1]=Math.max(intervals[len-1][1], newInterval[0][1]);
+			 }else {
+				 int temp[][] = new int[intervals.length+1][2];
+				 temp[temp.length-1]= newInterval[0];
+				 int k=0;
+		      		for(int i=0;i<intervals.length;i++) {
+		      			temp[k++]=intervals[i];
+		      		}
+		      		intervals=temp ;
+			 }
+			 return intervals ;
+			
+		} else {
+			
+			
+			return null ;
+		}
+		
+		
+	}
 
 }
